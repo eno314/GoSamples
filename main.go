@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"sync"
 	"time"
@@ -9,17 +10,19 @@ import (
 )
 
 func main() {
-	imageURLs := []string{
-		"https://spnvcdn.sports-digican.com/tennis/images/photo/rect/15733.jpg",
-		"https://spnavi.c.yimg.jp/spnavi/photo/20170905/soccer/japan_700799.jpg",
-		"https://sportsnavi.ht.kyodo-d.jp/golf/img/player_photo/K1015422.jpg",
+	flag.Parse()
+	args := flag.Args()
+
+	if len(args) == 0 {
+		fmt.Println("Please give imageURLs to argumens")
+		return
 	}
 
-	doNormal(imageURLs)
+	doNormal(args)
 
-	doWithChannel(imageURLs)
+	doWithChannel(args)
 
-	doWithWaitGroup(imageURLs)
+	doWithWaitGroup(args)
 }
 
 func doNormal(imageURLs []string) {
