@@ -7,10 +7,11 @@ import (
 )
 
 func main() {
-	err := image.Request("https://spnvcdn.sports-digican.com/tennis/images/photo/rect/15733.jpg")
+	duration, err := image.MeasureTimeByRequest("https://spnvcdn.sports-digican.com/tennis/images/photo/rect/15733.jpg")
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println("request success")
+
+	fmt.Printf("duration is %s\n", duration.String())
 }
