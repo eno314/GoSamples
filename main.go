@@ -14,17 +14,49 @@ func main() {
 		"https://sportsnavi.ht.kyodo-d.jp/golf/img/player_photo/K1015422.jpg",
 	}
 
-	totalDuration := time.Duration(0)
+	doNormal(imageURLs)
+
+	doWithChannel(imageURLs)
+}
+
+func doNormal(imageURLs []string) {
+	startTime := time.Now()
+
 	for _, imageURL := range imageURLs {
 		duration, err := image.MeasureTimeByRequest(imageURL)
 		if err != nil {
 			fmt.Println(err)
-			return
+			continue
 		}
 		fmt.Printf("duration is %s. URL : %s\n", duration.String(), imageURL)
-
-		totalDuration += duration
 	}
 
-	fmt.Printf("total duration is %s\n", totalDuration.String())
+	fmt.Printf("Normal duration is %s\n", time.Now().Sub(startTime).String())
+}
+
+func doWithChannel(imageURLs []string) {
+	startTime := time.Now()
+
+	chanel := make(chan time.Duration)
+
+	for _, imageURL := range imageURLs {
+		go measureTimeImageRequestWithChannel(imageURL, chanel)
+	}
+
+	for i := 0; i < len(imageURLs); i++ {
+		<-chanel
+	}
+
+	fmt.Printf("Goroutine duration is %s\n", time.Now().Sub(startTime).String())
+}
+
+func measureTimeImageRequestWithChannel(imageURL string, durationChan chan time.Duration) {
+	duration, err := image.MeasureTimeByRequest(imageURL)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("duration is %s. URL : %s\n", duration.String(), imageURL)
+
+	durationChan <- duration
 }
