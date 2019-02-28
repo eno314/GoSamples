@@ -1,28 +1,17 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"sync"
 	"time"
 
 	"github.com/eno314/GoSamples/image"
+	"github.com/eno314/GoSamples/random"
 )
 
 func main() {
-	flag.Parse()
-	args := flag.Args()
-
-	if len(args) == 0 {
-		fmt.Println("Please give imageURLs to argumens")
-		return
-	}
-
-	doNormal(args)
-
-	doWithChannel(args)
-
-	doWithWaitGroup(args)
+	target := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	fmt.Println(random.Shuffle(target))
 }
 
 func doNormal(imageURLs []string) {
