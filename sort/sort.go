@@ -1,5 +1,6 @@
 package sort
 
+// BubbleSort is sort by BubbleSort
 func BubbleSort(target []int) []int {
 	sorted := append([]int{}, target...)
 
