@@ -7,11 +7,14 @@ import (
 
 	"github.com/eno314/GoSamples/image"
 	"github.com/eno314/GoSamples/random"
+	"github.com/eno314/GoSamples/sort"
 )
 
 func main() {
 	target := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	fmt.Println(random.Shuffle(target))
+	random := random.Shuffle(target)
+	fmt.Println(random)
+	fmt.Println(sort.BubbleSort(random))
 }
 
 func doNormal(imageURLs []string) {
