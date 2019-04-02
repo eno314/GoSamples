@@ -11,10 +11,11 @@ import (
 )
 
 func main() {
-	target := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	random := random.Shuffle(target)
-	fmt.Println(random)
-	fmt.Println(sort.BubbleSort(random))
+	randomValues := random.RandomValues(30, 30)
+	fmt.Println(randomValues)
+	fmt.Println(sort.Bubble(randomValues))
+	fmt.Println(sort.Selection(randomValues))
+	fmt.Println(sort.Insertion(randomValues))
 }
 
 func doNormal(imageURLs []string) {

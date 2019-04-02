@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// Shuffle is shuffle slice element
 func Shuffle(target []int) []int {
 	size := len(target)
 	shuffled := append([]int{}, target...)
@@ -19,4 +20,15 @@ func Shuffle(target []int) []int {
 	}
 
 	return shuffled
+}
+
+// RandomValues is create slice whitch have random values.
+func RandomValues(maxValue int, length int) []int {
+	rand.Seed(time.Now().UnixNano())
+
+	randomValues := make([]int, length)
+	for i := 0; i < length; i++ {
+		randomValues[i] = rand.Intn(maxValue)
+	}
+	return randomValues
 }
