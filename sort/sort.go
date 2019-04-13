@@ -80,3 +80,40 @@ func Heap(target []int) []int {
 
 	return sorted
 }
+
+// Merge is sort by Merge sort.
+func Merge(target []int) []int {
+	targetLenght := len(target)
+
+	// 配列の前半・後半に分ける
+	firstSize := targetLenght - (targetLenght / 2)
+	first := target[firstSize:]
+	second := target[:firstSize]
+	if targetLenght > 2 {
+		// 2件以上の場合は再帰的にマージソートを繰り返す
+		first = Merge(first)
+		second = Merge(second)
+	}
+
+	// 前半・後半の先頭を比較しながら全体をソートする
+	sorted := []int{}
+	firstIndex := 0
+	secondIndex := 0
+	for firstIndex < len(first) && secondIndex < len(second) {
+		if first[firstIndex] < second[secondIndex] {
+			sorted = append(sorted, first[firstIndex])
+			firstIndex++
+		} else {
+			sorted = append(sorted, second[secondIndex])
+			secondIndex++
+		}
+	}
+	if firstIndex < len(first) {
+		sorted = append(sorted, first[firstIndex:]...)
+	}
+	if secondIndex < len(second) {
+		sorted = append(sorted, second[secondIndex:]...)
+	}
+
+	return sorted
+}
