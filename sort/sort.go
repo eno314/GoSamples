@@ -1,6 +1,9 @@
 package sort
 
 import (
+	"math/rand"
+	"time"
+
 	"github.com/eno314/GoSamples/datastruct"
 )
 
@@ -116,4 +119,32 @@ func Merge(target []int) []int {
 	}
 
 	return sorted
+}
+
+// Quick is sort by Quick sort.
+func Quick(target []int) []int {
+	if len(target) < 2 {
+		return append([]int{}, target...)
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	pivod := target[rand.Intn(len(target)-1)]
+
+	first := []int{}
+	second := []int{}
+	sames := []int{}
+	for _, v := range target {
+		if v < pivod {
+			first = append(first, v)
+		} else if v > pivod {
+			second = append(second, v)
+		} else {
+			sames = append(sames, v)
+		}
+	}
+
+	first = Quick(first)
+	second = Quick(second)
+
+	return append(append(first, sames...), second...)
 }

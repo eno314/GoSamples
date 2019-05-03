@@ -11,14 +11,67 @@ import (
 )
 
 func main() {
-	randomValues := random.RandomValues(30, 30)
-	fmt.Println(randomValues)
+	randomValues := random.RandomValues(10000, 10000)
+	// fmt.Println(randomValues)
 
-	fmt.Println(sort.Bubble(randomValues))
-	fmt.Println(sort.Selection(randomValues))
-	fmt.Println(sort.Insertion(randomValues))
-	fmt.Println(sort.Heap(randomValues))
-	fmt.Println(sort.Merge(randomValues))
+	doBubbleSort(randomValues)
+	// fmt.Println(doBubbleSort(randomValues))
+	doSelectionSort(randomValues)
+	// fmt.Println(doSelectionSort(randomValues))
+	doInsertionSort(randomValues)
+	// fmt.Println(doInsertionSort(randomValues))
+	doHeapSort(randomValues)
+	// fmt.Println(doHeapSort(randomValues))
+	doMergeSort(randomValues)
+	// fmt.Println(doMergeSort(randomValues))
+	doQuickSort(randomValues)
+	// fmt.Println(doQuickSort(randomValues))
+}
+
+func doBubbleSort(values []int) []int {
+	startTime := time.Now()
+	sorted := sort.Bubble(values)
+	printDuration("BubbleSort", startTime)
+	return sorted
+}
+
+func doSelectionSort(values []int) []int {
+	startTime := time.Now()
+	sorted := sort.Selection(values)
+	printDuration("SelectionSort", startTime)
+	return sorted
+}
+
+func doInsertionSort(values []int) []int {
+	startTime := time.Now()
+	sorted := sort.Insertion(values)
+	printDuration("InsertionSort", startTime)
+	return sorted
+}
+
+func doHeapSort(values []int) []int {
+	startTime := time.Now()
+	sorted := sort.Heap(values)
+	printDuration("HeapSort", startTime)
+	return sorted
+}
+
+func doMergeSort(values []int) []int {
+	startTime := time.Now()
+	sorted := sort.Merge(values)
+	printDuration("MergeSort", startTime)
+	return sorted
+}
+
+func doQuickSort(values []int) []int {
+	startTime := time.Now()
+	sorted := sort.Quick(values)
+	printDuration("QuickSort", startTime)
+	return sorted
+}
+
+func printDuration(sortName string, startTime time.Time) {
+	fmt.Printf("call took %v to run by %v.\n", time.Now().Sub(startTime), sortName)
 }
 
 func doNormal(imageURLs []string) {
