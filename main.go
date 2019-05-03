@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 	"sync"
 	"time"
 
@@ -16,9 +15,7 @@ func main() {
 	// fmt.Println(randomValues)
 
 	for _, sortable := range sort.Sortables() {
-		_, duration := sort.SortWithDuration(sortable, randomValues)
-		// fmt.Println(sorted)
-		fmt.Printf("call took %v to run by %v\n", duration, reflect.TypeOf(sortable))
+		sort.ShowCalcDurationBySort(sortable, randomValues)
 	}
 }
 

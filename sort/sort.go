@@ -1,6 +1,8 @@
 package sort
 
 import (
+	"fmt"
+	"reflect"
 	"time"
 )
 
@@ -16,6 +18,13 @@ func SortWithDuration(sortable Sortable, target []int) (sorted []int, duration t
 	return
 }
 
+// ShowCalcDurationBySort is show to calcuration duration by sort
+func ShowCalcDurationBySort(sortable Sortable, target []int) {
+	_, duration := SortWithDuration(sortable, target)
+	fmt.Printf("call took %v to run by %v\n", duration, reflect.TypeOf(sortable))
+}
+
+// Sortables is return types implements Sortable
 func Sortables() []Sortable {
 	return []Sortable{
 		NewBubbleSort(),
@@ -24,5 +33,6 @@ func Sortables() []Sortable {
 		NewHeapSort(),
 		NewMergeSort(),
 		NewQuickSort(),
+		NewBucketSort(),
 	}
 }
