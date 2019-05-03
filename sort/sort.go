@@ -1,9 +1,6 @@
 package sort
 
 import (
-	"math/rand"
-	"time"
-
 	"github.com/eno314/GoSamples/datastruct"
 )
 
@@ -127,8 +124,9 @@ func Quick(target []int) []int {
 		return append([]int{}, target...)
 	}
 
-	rand.Seed(time.Now().UnixNano())
-	pivod := target[rand.Intn(len(target)-1)]
+	// rand.Seed(time.Now().UnixNano())
+	// pivod := target[rand.Intn(len(target)-1)]
+	pivod := target[0]
 
 	first := []int{}
 	second := []int{}
